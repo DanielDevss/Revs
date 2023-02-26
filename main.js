@@ -24,7 +24,7 @@ app.use(cookieParser());
 
 
 // TODO servidor
-let port = process.env.PORT
+let port = procces.env.PORT || 4000;
 
 
 app.listen(port, () => {
