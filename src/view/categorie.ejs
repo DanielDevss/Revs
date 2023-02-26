@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es_MX">
+<%-include('partials/head.ejs')%>
+<body>
+
+
+    <%-include('partials/navbar.ejs')%>
+
+    <%-include('partials/sidebar.ejs')%>
+    
+
+    <section class="container">
+        <h1 class="title"><%=title.replace('Revs: ', '')%></h1>
+        <hr>
+    </section>
+        <%-include('partials/carousel.ejs')%>
+
+    <section class="container">
+        
+        <!-- <input type="search" placeholder="Buscar" id="searchInput"> -->
+        <ul class="categories" id="contenido">
+
+            <%web.forEach((web)=>{%>
+            <li class="card">
+                <img loading="lazy" class="card__icon" src="<%=web.icon%>" alt="logotipo de sitio web <%=web.nameWeb%>">
+                <div class="card__body">
+                    <h2 class="card__name"><%=web.nameWeb%></h2>
+                    <a href="<%=web.urlWeb%>" class="card__enlace">Visitar sitio</a>
+                    <button onclick="document.querySelector('#modal<%=web._id%>').showModal()" class="card__btnInfo">Más información</button>
+                </div>
+            </li>
+
+            <dialog id="modal<%=web._id%>" class="modalInfoWeb">
+                <header class="modalInfoWeb__header">
+                    <div class="modolInfoWeb__logo">
+                        <img loading="lazy" class="modalInfoWeb__icon" width="60" src="<%=web.icon%>" alt="Logotipo de <%=web.nameWeb%>">
+                        <div class="modalInfoWeb__headerText">
+                            <h2><%=web.nameWeb%></h2>
+                            <span>Le gusto a <%=web.likes%> personas más</span>
+                        </div>
+                    </div>
+                    <a class="btn-border btnIr" href="<%=web.urlWeb%>"><span>Visitar sitio</span></a>
+                </header>
+                <article class="modalInfoWeb__body">
+                    <textarea class="modalInfo__textarea"><%=web.info%></textarea>
+                    <img src="<%=web.img%>"  loading="lazy" alt="Imagen de <%=web.nameWeb%>">
+                </article>
+                <article class="modalInfoWeb__footer">
+                    <div>
+                        <form action="/saveWeb/<%=web._id%>" method="POST">
+                            <button type="submit" class="btn-simple-primary"><ion-icon name="bookmark-outline"></ion-icon>Guardar web</button>
+                        </form>
+                        <form action="/like/<%=web._id%>" method="POST">
+                            <button type="submit" class="btn-simple-primary"><ion-icon name="heart-circle-outline"></ion-icon>Me gusta</button>
+                        </form>
+                    </div>
+                    <button class="modalInfoWeb__close" onclick="document.querySelector('#modal<%=web._id%>').close()">Cerrar ventana</button>
+                </article>
+            </dialog>
+
+        <%});%>
+
+        </ul>
+    </section>
+
+
+    <script src="/js/search.js"></script>
+
+    
+</body>
+</html>

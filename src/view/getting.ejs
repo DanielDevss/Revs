@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es_MX">
+<%-include('partials/head.ejs')%>
+<body>
+
+    <%-include('partials/navbar.ejs')%>
+
+    <%-include('partials/sidebar.ejs')%>
+
+
+    <main class="container getting">
+        <h1 class="f-averia getting__title">Encuentra los recursos que necesitas</h1>
+        <p class="getting__text">Increíbles recursos para desarrolladores y diseñadores; cientos de librerías de uso premium y gratuito. En esté sitio web encontraras herramientas, plugins, fuentes, iconos, biblioteca de imágenes, frameworks css, animaciones para sitios web, sitios webs de desafíos y mucho más.</p>
+    </main>
+
+
+    <div class="separador"></div>
+
+    <%-include('partials/carouselPopulars.ejs')%>
+
+    <script>
+        document.querySelectorAll('.link')[1].style.color="var(--colorPrimary)";
+        document.querySelectorAll('.link')[1].style.pointerEvents = "none"
+    </script>
+
+
+
+
+</body>
+</html>

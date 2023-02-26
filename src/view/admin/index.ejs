@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es_MX">
+<%-include('partials/head.ejs')%>
+<body class="home">
+    
+    <%-include('partials/nav.ejs')%>
+
+    <main class="row admin-container">
+        <article class="col-md-4 col-sm-6">
+            <article class="card">
+                <a href="/admin-webs">
+                    <ion-icon class="icon-card" name="globe"></ion-icon>
+                    <h3><%=webs%></h3>
+                    <p>Webs</p>
+                </a>
+            </article>
+        </article>
+        <article class="col-md-4 col-sm-6">
+            <article class="card">
+                <a href="/admin-webs">
+                    <ion-icon class="icon-card" name="albums"></ion-icon>
+                    <h3><%=category%></h3>
+                    <p>Categorias</p>
+                </a>
+            </article>
+        </article>
+        <article class=" col-sm-12 col-md-4">
+            <article class="card">
+                <a href="/admin-users">
+                    <ion-icon class="icon-card" name="people"></ion-icon>
+                    <h3><%=users%></h3>
+                    <p>Usuarios</p>
+                </a>
+            </article>
+        </article>
+    </main>
+
+</body>
+</html>

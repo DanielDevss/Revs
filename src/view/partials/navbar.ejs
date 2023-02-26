@@ -1,0 +1,53 @@
+<header class="headerNavbar">
+    <section class="headerNav">
+        <a href="/">
+            <img src="/img/logo.png" alt="logotipo de revs" width="60">
+            <h2>Revs</h2>
+        </a>
+    </section>
+    <div class="bgNavbar"></div>
+    <nav class="navbar">
+        <ul class="navbar__contenedor" id="menu">
+            <img src="/img/home.jpeg" alt="" class="navbar__img">
+
+            <li class="navbar__link">
+                <a href="/" class="link"><ion-icon name="home-outline"></ion-icon> Bienvenida</a>
+            </li>
+            <li class="navbar__link">
+                <a href="/getting-started" class="link"><ion-icon name="file-tray-stacked-outline"></ion-icon> Recursos</a>
+            </li>
+            <li class="navbar__link">
+                <a href="/informacion" class="link"><ion-icon name="information-circle-outline"></ion-icon> Información</a>
+            </li>
+            <li class="navbar__link">
+                <a href="/contacto" class="link"><ion-icon name="mail-outline"></ion-icon> Contacto</a>
+            </li>
+
+        </ul>
+        <button type="button" id="btnMenu">
+            <ul>
+                <li class="line"></li>
+                <li class="line"></li>
+                <li class="line"></li>
+            </ul>
+            Menú
+        </button>
+        
+        <div class="navbar__contenedor">
+            <input class="navbar__search" type="search" id="searchInput" placeholder="Buscar">
+            <%if(title === "Mí pérfil"){%>
+                <form action="/logout" method="POST">
+                    <button type="submit" class="navbar__btn"><span>Cerrar Sesión</span><ion-icon name="log-out-outline"></ion-icon></button>
+                </form>
+            <%}else{%>
+                    <a class="navbar__btn" href="/account"><span><%=btnLogin%></span> <ion-icon name="person-outline"></ion-icon></a>
+            <%}%>
+            </div>
+    </nav>
+    
+</header>
+
+<div style="height: 150px;"></div>
+
+
+<script src="/js/menu.js"></script>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<%-include('partials/head.ejs')%>
+<body>
+    <%-include('partials/nav.ejs')%>
+    
+    <main class="admin-container msjs">
+        <h1 class="pb-3"><%=title%> (<%=msj.length%>)</h1>
+        
+        <section class="msj__container">                
+        <% if(msj.length > 0) { msj.forEach( msj => { %>
+            
+                <article class="msj">
+                    <header class="msj__header">
+                        <p class="msj__email"><ion-icon name="mail-outline"></ion-icon> <%= msj.email %></p>
+                        <form action="/delete-msj/<%=msj._id%>" method="POST"><button class="msj__delete btn btn-danger" type="submit"><ion-icon name="trash"></ion-icon></button></form>
+                    </header>
+    
+                    <section class="msj__body">
+                        <h2 class="msj__name">
+                            <%= msj.name %>
+                        </h2>
+                        <textarea disabled rows="3" class="msj__msj"><%= msj.message %></textarea>
+    
+              
+                            
+                        </section>
+                        
+                    <footer class="msj__footer">
+                        <% if(msj.email !== "No Email") {%>
+                            <a class="btn btn-primary msj__button" href="mailto:<%=msj.email%>">Enviar correo <ion-icon name="mail-open-outline"></ion-icon></a>
+                        <%}%>
+    
+                        <p class="msj__date"><ion-icon name="calendar"></ion-icon> <%= msj.fechaMsj %></p>
+                    </footer>
+                </article>
+                
+                
+                
+                
+        <%}); } else {%>
+            </section>
+            <section class="msj__container">
+                <img class="msj__empty" src="/svg/empty.svg" alt="Ilustración de empty">
+                <p class="msj_noresult">No hay Mensajes</p>
+            </section>
+        <%}%>
+    </main>
+
+</body>
+</html>

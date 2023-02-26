@@ -1,0 +1,39 @@
+<div class="avatares">
+    <!--LISTA DE AVATARES-->
+    <div class="select-avatar" id="a_avatar1">
+        <input class="select-avatar__rd" type="radio" name="avatar" id="avatar1" value="default.png">
+        <img onclick="selectAvatar(1)" class="select-avatar__img" src="/avatares/default.png" id="img_avatar1" alt="Avatar por defecto">
+    </div>
+
+    <div class="select-avatar" id="a_avatar2">
+        <input class="select-avatar__rd" type="radio" name="avatar" id="avatar2" value="nauti.png">
+        <img onclick="selectAvatar(2)" class="select-avatar__img" src="/avatares/nauti.png" id="img_avatar1" alt="Avatar por defecto">
+    </div>
+    
+    <div class="select-avatar" id="a_avatar3">
+        <input class="select-avatar__rd" type="radio" name="avatar" id="avatar3" value="robot-zero.png">
+        <img onclick="selectAvatar(3)" class="select-avatar__img" src="/avatares/robot-zero.png" id="img_avatar1" alt="Avatar por defecto">
+    </div>
+
+    <div class="select-avatar" id="a_avatar4">
+        <input class="select-avatar__rd" type="radio" name="avatar" id="avatar4" value="green.png">
+        <img onclick="selectAvatar(4)" class="select-avatar__img" src="/avatares/green.png" id="img_avatar1" alt="Avatar por defecto">
+    </div>
+    
+    <div class="select-avatar" id="a_avatar5">
+        <input class="select-avatar__rd" type="radio" name="avatar" id="avatar5" value="yao.png">
+        <img onclick="selectAvatar(5)" class="select-avatar__img" src="/avatares/yao.png" id="img_avatar1" alt="Avatar por defecto">
+    </div>
+
+</div>
+
+<script>
+    let avatarImg = document.querySelector('#avatar__img');
+    function selectAvatar(id){
+        let rd = document.querySelector(`#avatar${id}`);
+        rd.checked = true;
+        console.log(rd.value);
+        avatarImg.src = `/avatares/${rd.value}`;
+        document.querySelector('#modalAvatares').close();
+    }
+</script>

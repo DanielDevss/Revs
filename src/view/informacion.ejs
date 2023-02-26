@@ -1,0 +1,58 @@
+<html>
+    <%-include('partials/head.ejs')%>
+    <body id="informacion">
+        <%-include('partials/navbar')%>
+        <main class="informacion">
+            <h1 class="informacion__title">Conócenos</h1>
+            <section class="informacion__campo">
+                <h2 class="informacion__subtitle">Nuestra misión:</h2>
+                <p class="informacion__p">Nuestra misión es ayudar a los diseñadores y desarrolladores web a crear sitios web impactantes y atractivos proporcionando acceso a una amplia gama de recursos y herramientas útiles. Queremos ser el destino principal para aquellos que buscan inspiración y soluciones para sus proyectos web, ofreciendo una selección cuidadosamente seleccionada de iconos, fuentes de letra, frameworks CSS, animaciones para sitios web y mucho más.</p>
+            </section>
+            <section class="informacion__campo">
+                <h3 class="informacion__subtitle">Nuestra visión:</h3>
+                <p class="informacion__p">Nuestra visión es convertirnos en la fuente líder de recursos y herramientas para el diseño y desarrollo web en línea, proporcionando una plataforma completa y accesible para que los diseñadores y desarrolladores encuentren todo lo que necesitan para crear sitios web únicos y efectivos. Nos esforzamos por ser una comunidad activa y dinámica, brindando recursos de alta calidad, soporte personalizado y un ambiente que fomenta la colaboración y el crecimiento de la creatividad en el mundo del diseño y desarrollo web.</p>
+            </sectionclass=>
+        </main>
+
+        <section class="acuerdo" container">
+            <h2 class="acuerdo__title">Acuerdo de usuario</h2>
+            <article class="acuerdo__campo">
+                <h3 class="acuerdo__subtitle">
+                    Términos y condiciones 
+                </h3>
+                <p class="acuerdo__p">Bienvenido a nuestra web que ofrece recursos y enlaces de iconos, fuentes de letras, frameworks CSS, animaciones para webs, entre otros. A continuación, se establecen los términos y condiciones que regulan el uso de nuestra web. Al acceder o utilizar nuestra web, aceptas estos términos y condiciones en su totalidad. Si no estás de acuerdo con estos términos y condiciones, por favor, no utilices nuestra web.</p>
+            </article>
+            <article class="acuerdo__campo">
+                <h3 class="acuerdo__subtitle">
+                    Privacidad de los usuarios
+                </h3>
+                <p class="acuerdo__p">Nos comprometemos a proteger la privacidad de nuestros usuarios y su información personal. En ese sentido, cuando se requiera el uso de datos personales como el correo, teléfono y nombre, estos serán usados exclusivamente para comunicarnos con los usuarios y ofrecerles recomendaciones de acuerdo a su profesión. Estos datos no se comparten con ninguna empresa externa y se encuentran protegidos dentro de nuestra web. Al utilizar nuestra web, aceptas que recopilemos y usemos esta información de acuerdo con nuestra política de privacidad.</p>
+            </article>
+            <article class="acuerdo__campo">
+                <h3 class="acuerdo__subtitle">
+                    Uso de los recursos de la web
+                </h3>
+                <p class="acuerdo__p">Los recursos ofrecidos en nuestra web no son propiedad de nuestra web, sino de terceras personas físicas o morales. Por ello, se solicita respeto para los recursos que están dentro de la web y no deben ser utilizados para fines maliciosos. Al hacer uso de los recursos, aceptas que estos son para uso personal y no comercial, y te comprometes a no distribuir, vender, reproducir o modificar el contenido de los recursos.</p>
+            </article>
+            <article class="acuerdo__campo">
+                <h3 class="acuerdo__subtitle">
+                    Responsabilidad de los usuarios
+                </h3>
+                <p class="acuerdo__p">Es responsabilidad del usuario ingresar su información de manera correcta y completa en nuestra web. No nos hacemos responsables por la información ingresada por los usuarios en la web, ya que es responsabilidad exclusiva del usuario asegurarse de que la información sea precisa y esté actualizada.</p>
+            </article>
+            <article class="acuerdo__campo">
+                <h3 class="acuerdo__subtitle">
+                    Cambios en los términos y condiciones
+                </h3>
+                <p class="acuerdo__p">Nos reservamos el derecho de cambiar, modificar o actualizar estos términos y condiciones en cualquier momento. Te recomendamos revisar regularmente estos términos y condiciones para conocer cualquier cambio o actualización. El uso continuado de nuestra web después de la publicación de cambios, modificaciones o actualizaciones se considerará como aceptación de estos cambios.</p>
+            </article>
+            <p>Si tienes alguna duda o pregunta acerca de nuestros términos y condiciones, por favor contáctanos a través de nuestros canales de soporte.</p>
+        </section>
+
+
+        <script>
+            document.querySelectorAll('.link')[2].style.color="var(--colorPrimary)";
+            document.querySelectorAll('.link')[2].style.pointerEvents = "none"
+        </script>
+    </body>
+</html>

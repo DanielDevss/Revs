@@ -1,0 +1,210 @@
+<html>
+<%-include('partials/head.ejs')%>
+<body id="profile">
+    <%-include('partials/navbar.ejs')%>
+
+    <!--TODO sidebar profile-->
+    <div class="contenidoProfile">
+        <aside class="profile">
+            
+            <section class="profile__section">    
+                <header class="profile__header">
+                    <img class="profile__img" src="/avatares/<%=user.avatar%>" alt="avatar">
+                </header>
+                <article class="profile__body">
+                    <article class="profile__campo"> 
+                        <p class="profile__label">Nombre</p>
+                        <p class="profile__userData"><%=user.name%></p>
+                        <p class="profile__labelBold"><%=user.profesion%></p>
+                    </article>
+                    <article class="profile__campo">
+                        <p class="profile__label">Correo electronico</p>
+                        <p class="profile__userData"><%=user.email%></p>
+                    </article>
+                    <article class="profile__campo"> 
+                        <p class="profile__label">Número de teléfono</p>
+                        <p class="profile__userData">
+                        <%if(user.phone == ""){%>
+                            Sin registro
+                        <%}%>
+                            <%=user.phone%>
+                        </p>
+                    </article>
+                </article>
+                <div class="profile__separador"></div>
+                <article class="profile__campo">
+                    <p class="profile__userData">Guardados (<%=webs.length%>)</p>
+                    <p class="profile__userData">Interacciones (0)</p>
+                </article>
+                <div class="profile__separador"></div>
+                <article class="profile__campo">
+                    <button class="profile__button" id="editarUser" type="button">Editar perfil</button>
+                </article>
+            </section>
+    
+            <footer class="profile__footer">
+                <button class="profile__button" type="button">Ajustes de cuenta</button>
+                <form action="/logout" method="POST">
+                    <button class="profile__logout" type="submit">Cerrar sesión</button>
+                </form>
+            </footer>
+        </aside>
+
+        
+        <!--LINK MODAL EDITAR-->
+
+        
+        <dialog id="modalEdit" class="modaluser">
+            <form action="/user-update/<%=user._id%>" method="POST" id="userUpdateForm" class="modaluser__container">
+                <section class="modaluser__body">
+                    <section class="modaluser__header">
+                        <img src="/avatares/<%=user.avatar%>" id="avatar__img" class="profile__img" width="100" height="100">
+                        <div class="profile__campo">
+                            <h3 class="profile__labelBold">Cambio de avatar</h3>
+                            <button class="modaluser__input" id="btnShowAvatares" onclick="document.querySelector('#modalAvatares').showModal()" type="button"><span>Seleccionar avatar nuevo</span></button>
+                        </div>
+                        <!--Modal de avatares-->
+                        <dialog class="modalAvatares" id="modalAvatares">
+                            <%-include('partials/avatares.ejs')%>
+                        </dialog>
+
+                    </section>
+                    
+                    <section class="profile__campo">
+                        <label for="name" class="profile__labelBold">Edita tu nombre</label>
+                        <input type="text" class="modaluser__input" name="name" id="name" value="<%=user.name%>">
+                        <span class="span__alert span-name"></span>
+                    </section>
+
+                    <section class="profile__campo">
+                        <label for="profesion" class="profile__labelBold">Editar profesión</label>
+                        <select class="modaluser__input" name="profesion" id="profesion">
+                            <option selected value="<%=user.profesion%>"><%=user.profesion%></option>
+                            <%prof.forEach( p => {%>
+                            
+                            <%if(p.nameProfesion === "user.profesion") {%>
+                                <!--Si no la profesion es igual a la del usuario no se muestra nada-->
+                            <%}else if(p.nameProfesion !== "user.profesion"){%>
+                            
+                            <option value="<%=p.nameProfesion%>"><%=p.nameProfesion%></option>
+                            
+                            <%}});%>
+
+                            
+                        </select>
+                    </section>
+                    
+                    <section class="profile__campo">
+                        <label for="phone" class="profile__labelBold">Número de teléfono</label>
+                        <input type="tel" class="modaluser__input" name="phone" id="phone" value="<%=user.phone%>">
+                        <span class="span__alert span-phone"></span>
+                    </section>
+
+                    <section class="profile__campo">
+                        <label for="pass" class="profile__labelBold">Cambiar contraseña</label>
+                        <a class="modaluser__enlace" href="#">Cambiar contraseña <ion-icon name="chevron-forward-outline"></ion-icon></a>
+                    </section>
+
+                </section>
+                
+                <footer class="modaluser__footer">
+                    <button class="profile__logout" type="submit">Guardar cambios</button>
+                    <button class="profile__button modaluser__cancel" id="closeModal" type="button">Cancelar</button>
+                </footer>
+            </form>
+        </dialog>
+
+
+
+
+        <!--TODO webs guardadas-->
+        <main class="websaves">
+            <%if(webs.length > 0) {%>
+            <header class="websaves__header">
+                <h1 class="title" style="padding-bottom: 1rem;">Tus webs favoritas (<%=webs.length%>)</h1>
+                <p class="texto">Webs que haz guardado para tí</p>
+            </header>
+
+            
+            <section class="save">
+                
+                <%webs.forEach((e)=>{%>
+                <article class="save__card">    
+                    <form action="/deleteSaveWeb/<%=e.idWeb%>" method="POST">
+                        <button class="save__delete" type="submit"><ion-icon name="trash-outline"></ion-icon></button>
+                    </form>
+                    <img class="save__bg" src="<%=e.icon%>" alt="imagen de <%e.nameWeb%>">
+                    <section class="save__body">
+                        <span class="save__title"><%=e.nameWeb%></span>
+                        <div class="save__dropup">
+                            <a href="<%=e.urlWeb%>" class="save__link">Visitar Web</a>
+                            <button type="button" onclick="document.querySelector('#modal<%=e.idWeb%>').showModal()" class="save__more">Más información</button>
+                        </div>
+                    </section>
+                </article>
+
+                <dialog id="modal<%=e.idWeb%>" class="modalInfoWeb">
+                    <header class="modalInfoWeb__header">
+                        <div class="modolInfoWeb__logo">
+                            <img loading="lazy" class="modalInfoWeb__icon" width="60" src="<%=e.icon%>" alt="icono de <%=e.nameWeb%>">
+                            <div class="modalInfoWeb__headerText">
+                                <h2><%=e.nameWeb%></h2>
+                                <span>Le gusto a <%=e.likes%> personas más</span>
+                            </div>
+                        </div>
+                        <a class="btn-border btnIr" href="<%=e.urlWeb%>"><span>Visitar sitio</span></a>
+                    </header>
+                    <article class="modalInfoWeb__body">
+                        <textarea class="modalInfo__textarea"><%=e.info%></textarea>
+                        <img src="<%=e.img%>" loading="lazy" alt="Imagen de <%=e.nameWeb%>">
+                    </article>
+                    <article class="modalInfoWeb__footer">
+                        <div>
+                            <form action="/deleteSaveWeb/<%=e.idWeb%>" method="POST">
+                                <button type="submit" class="btn-simple-primary"><ion-icon name="trash-outline"></ion-icon>Borrar</button>
+                            </form>
+                        </div>
+                        <button class="modalInfoWeb__close" onclick="document.querySelector('#modal<%=e.idWeb%>').close()">Cerrar ventana</button>
+                    </article>
+                </dialog>
+
+                <%});%>
+                
+            </section>
+            <%}else{%>
+
+            <section class="empty">
+                <img class="empty__img" src="/svg/añadir.svg" alt="Sin webs guardadas">
+                <h3 class="empty__title">No hay webs guardadas</h3>
+                <p class="empty__text">Aquí apareceran las webs que guardes desde el apartado <a href="/getting-started"><b>Recursos</b></a>.</p>
+            </section>
+
+            <%}%>
+
+        </main>
+    </div>
+
+
+            
+    <script>
+        let btnEdit = document.querySelector('#editarUser'),
+            btnClose = document.querySelector('#closeModal'),
+            mEdit = document.querySelector('#modalEdit')
+
+        btnEdit.addEventListener('click', () => {
+            mEdit.showModal();
+        });
+
+        btnClose.addEventListener('click', () => {
+            mEdit.close();
+        });
+
+    </script>
+
+
+
+    <!-- scripts de alert delete -->
+
+    <script src="/js/validarUpdate.js"></script>
+</body>
+</html>

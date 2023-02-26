@@ -1,0 +1,35 @@
+
+<aside class="sidebar">
+    <h2 class="sidebar__title"><ion-icon name="funnel-outline"></ion-icon>Filtrar Categorías</h2>
+    <ul class="sidebar__content">
+        <% results.forEach( (e) => { %>
+        <li class="sidebar__link">
+            <a style="display: block;" href="/categories/<%=e.nameCategory%>"><%=e.nameCategory%> (<b><%=e.cant%></b>)</a>
+        </li>
+        <% }); %>
+    </ul>
+</aside>
+
+<button class="float__sidebar" type="button" onclick="document.querySelector('#modalCategories').showModal()">
+    <ion-icon name="list-outline"></ion-icon>
+    Categorías
+</button>
+
+
+
+<dialog class="modalCategoriesSelect" id="modalCategories">
+    <header class="modal__header">
+        <h2>Categories</h2>
+        <button class="btnModal-close" onclick="document.querySelector('#modalCategories').close()">
+            <ion-icon name="close-outline"></ion-icon>
+        </button>
+    </header>
+
+    <ul class="modal__list">
+        <% results.forEach( (e) => { %>
+        <li>
+            <a href="/categories/<%=e.nameCategory%>"><%=e.nameCategory%> <span>(<b><%=e.cant%></b>)</span></a>
+        </li>
+        <% }); %>
+    </ul>
+</dialog>

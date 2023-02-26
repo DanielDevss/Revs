@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<%-include('partials/head.ejs')%>
+<body>
+    <%-include('partials/nav.ejs')%>
+    
+    <main class="admin-container">
+        <h1 class="text-center">Usuarios registrados (<%=users.length%>)</h1>
+        <button class="btn btn-outline-dark d-flex align-items-center gap-2" type="button" data-bs-toggle="modal" data-bs-target="#modalProfesiones"><ion-icon name="briefcase"></ion-icon> Profesiones</button>
+
+        <!--NOTE MODAL DE PROFESIONES-->
+        <!-- Modal -->
+        <div class="modal fade" id="modalProfesiones" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="#modalProfesionesLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header gap-2">
+                        <h5 class="modal-title" id="modalProfesionesLabel">
+                            Profesiones
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form action="/add-profesion" method="POST">
+                            <section class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Profesión" name="nameProfesion">
+                                <button class="btn btn-outline-success" type="submit">Añadir</button>
+                            </section>
+                        </form>
+
+                        <ul class="list-group overflow-auto" style="max-height: 300px;">
+
+                            <%if(profesion.length > 0){%>              
+
+                            <%profesion.forEach(p => {%>
+                            <li class="list-group-item d-flex align-items-center justify-content-between w-100">
+                                    <%=p.nameProfesion%>
+                                    <form action="/delete-profesion/<%=p._id%>" method="POST">
+                                        <button class="btn btn-danger">
+                                            <ion-icon name="trash"></ion-icon>
+                                        </button>
+                                    </form>
+                            <li>
+                            <%});%>
+
+                            <%}else{%>
+                            
+                            <li class="list-group-item text-center">No hay profesiones</li>
+                            
+                            <%}%>
+                        </ul>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--NOTE LISTA DE USUARIOS ACTUALES-->
+
+        <ul class="list-group mt-3">
+        <%users.forEach(e => {%>
+
+
+            <li class="list-group-item row d-flex justify-content-between align-items-center">
+                <div class="col ms-2 me-auto">
+                    <span class="fw-bold"><%=e.name%></span>
+                    <%=e.profesion%>
+                </div>
+                <span class="col"><%=e.email%></span>
+                <span class="col">
+                    <%if(e.phone !== ""){%>
+                    <%=e.phone%>
+                    <%}else{%>
+                    Sin número
+                    <%}%>
+                </span>
+                <section class="col d-flex align-items-center justify-content-center gap-1">
+                    <form action="/deleteUser/<%=e._id%>" method="POST">
+                        <button class="btn btn-danger">Borrar</button>
+                    </form>
+                    <%if(e.bloqueo == 1){%>
+                        <form action="/desbaneo/<%=e._id%>" method="POST"><button class="btn btn-warning">Desbloquear</button></form>
+                    <%}else{%>
+                        <form action="/banear/<%=e._id%>" method="POST"><button class="btn btn-warning">Bloquear</button></form>
+                    <%}%>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modaluser<%=e._id%>">Editar</button>
+                </section>
+            </li>
+
+
+            <!--FORMULARIO DE EDICION DE USUARIOS-->
+
+            <section class="modal" tabindex="-1" id="modaluser<%=e._id%>">
+                <article class="modal-dialog">
+                  <form action="/user-update/<%=e._id%>" method="POST" class="modal-content">
+                    <header class="modal-header">
+                      <h5 class="modal-title">Edición de usuario</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </header>
+                    <section class="modal-body">
+
+                        <article class="form-floating mb-3">
+                            <input type="text" class="form-control" name="name" id="name" value="<%=e.name%>" placeholder="name@example.com">
+                            <label for="floatingInput">Nombre</label>
+                        </article>
+                        
+                        <label class="form-label" for="profesion">Profesiòn</label>
+                        <select id="profesion" name="profesion" class="form-select mb-3" aria-label=".form-select-lg example">
+                        <option selected><%=e.profesion%></option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+
+                        <article class=" form-floating">
+                            <input type="email" class="form-control" id="email" value="<%=e.email%>" placeholder="Password">
+                            <label for="email">Correo</label>
+                        </article>
+
+                        <article class="form-floating mt-3">
+                            <%if(e.phone === ""){%>
+                            <input type="tel" class="form-control" id="phone" value="" placeholder="Password">
+                            <%}else{%>
+                            <input type="tel" class="form-control" id="phone" value="<%=e.phone%>" placeholder="Password">
+                            <%}%>
+                            <label for="phone">Nùmero de telefono</label>
+                        </article>
+
+                    </section>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cerrar</button>
+                      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </div>
+                  </form>
+                </article>
+              </section>
+
+        <%});%>
+        </ul>
+
+    </main>
+
+</body>
+</html>

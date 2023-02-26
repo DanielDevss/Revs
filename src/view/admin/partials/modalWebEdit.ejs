@@ -1,0 +1,73 @@
+<!-- NOTE MODAL EDITAR WEB -->
+<div class="modal" id="editWeb" tabindex="-1" aria-labelledby="editWebLabel" aria-hidden="true">
+    <section class="modal-dialog">
+        <section class="modal-content">
+            <form action="/updateWeb/<%=w._id%>" method="POST">
+                <header class="modal-header">
+                    <h5 class="modal-title" id="editWebLabel">Editar <%=w.nameWeb%></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </header>
+
+                <section style="max-height: 70vh; overflow: auto;" class="modal-body">
+                    
+                    <!--*NOMBRE-->
+                    <label for="nameWeb" class="form-label">Nombre de la Web</label>
+                    <article class="input-group mb-3">
+                        <span class="input-group-text"><ion-icon name="browsers-sharp"></ion-icon></span>
+                        <input type="text" name="nameWeb" class="form-control" id="nameWeb" value="<%=w.nameWeb%>">
+                    </article>
+                    
+                    <!--*CATEGORIA-->
+                    <label for="category" class="form-label">Categoría</label>
+                    <article class="mb-3 input-group">
+                        <span class="input-group-text"><ion-icon name="albums"></ion-icon></span>
+                        <select class="form-control" name="category" id="category">
+                            <option value="<%=w.category%>" selected><%=w.category%></option>
+                            
+                            <!--? CATEGORIAS DESDE DB-->
+                            <%categories.forEach( c => {%>
+                                <option value="<%=c.nameCategory%>"><%=c.nameCategory%></option>
+                                <%});%>
+                                
+                            </select>
+                        </article>
+                        
+                    <!--*DESCRIPCION-->
+                    <label for="info" class="form-label">Descripción</label>
+                    <article class="mb-3 input-group">
+                        <span class="input-group-text"><ion-icon name="information-circle"></ion-icon></span>
+                        <textarea name="info" class="form-control" id="info"><%=w.info%></textarea>
+                    </article>
+                    
+                    <!--*ENLACE O URL-->
+                    <label for="urlWeb" class="form-label">Dirección de la web</label>
+                    <article class="mb-3 input-group">
+                        <span class="input-group-text"><ion-icon name="link"></ion-icon></span>
+                        <input type="url" name="urlWeb" class="form-control" id="urlWeb" value="<%=w.urlWeb%>">
+                    </article>
+                    
+                    <!--*IMAGEN WEB-->
+                    <label for="img" class="form-label">Imagen de la web</label>
+                    <article class="mb-3 input-group">
+                        <span class="input-group-text"><ion-icon name="image"></ion-icon></span>
+                        <input type="url" name="img" class="form-control" id="img" value="<%=w.img%>">
+                    </article>
+                    
+                    <!--*LOGO WEB-->
+                    <label for="icon" class="form-label">Logotipo de la web</label>
+                    <article class="input-group">
+                        <span class="input-group-text"><ion-icon name="star"></ion-icon></span>
+                        <input type="url" name="icon" class="form-control" id="icon" value="<%=w.icon%>">
+                    </article>
+
+
+                </section>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </div>
+            </form>
+        </section>
+    </section>
+</div>

@@ -1,0 +1,21 @@
+<html>
+    <%-include('partials/head.ejs')%>
+
+    <body class="codeverify">
+
+        <header class="codeverify__header">
+            <h1 class="codeverify__title title">Validación de correo</h1>
+            <p class="codeverify__subtitle">Este paso es importante para comprobar que el correo existe</p>
+        </header>
+        
+        <form class="codeverify__form" action="/verify-correo" method="POST">
+            <label class="codeverify__label" for="code">Ingresa el codigo de verificación</label>
+            <input class="codeverify__input" type="number" id="code" name="code_input" placeholder="--Código--">
+            <p class="codeverify__parrafo">Hola <%=name%> te enviamos un código de verificación a <%=email%>. Ingresalo para continuar.</p>
+            <button class="codeverify__validar codeverify__btn" type="submit">Validar correo</button>
+        </form>
+        <form action="/createCode" method="POST"><button class="codeverify__reenviar codeverify__btn" type="submit">Reenviar código <ion-icon name="mail-outline"></ion-icon></button></form>
+
+    </body>
+
+</html>

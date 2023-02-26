@@ -1,0 +1,21 @@
+:root{
+    font-family: 'Mukta', sans-serif;
+    font-weight: 400;
+    box-sizing: border-box;
+    --colorPrimary: #3daca1;
+    --colorSecundary: #03A9F4;
+    --colorLigth: #161616;
+    --colorWhite: #3f3f3f;
+    --colorBlack: #d1d1d1;
+    --colorDark: #dadada;
+    --colorDanger: #bf3333;
+    
+    color: var(--colorBlack);
+    --sombra1: 0px 25px 100px 10px #34535e89;
+    --sombra2: 0px 25px 100px 10px #1e201f51;
+    --sombra3: 0px 25px 100px 10px #74a79a22;
+    --sombra4: 0px 10px 20px 10px #a1b3ae2e;
+}
+p{
+    color: var(--colorDark);
+}

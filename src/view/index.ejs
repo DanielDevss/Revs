@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es_MX">
+
+    <%-include('partials/head.ejs')%>
+
+<body id="home">
+
+    <nav class="navHome">
+        <div class="navHome__logo">
+            <img src="img/logo.png" width="60" alt="logotipo del sitio #Revs">
+            <h2>Revs</h2>
+        </div>
+        <a class="navHome__btn" href="/account">
+            <span><%=btnlogin%></span>
+            <ion-icon name="person-outline"></ion-icon>
+        </a>
+    </nav>
+
+    <section class="containerHome">
+        <img class="containerHome__img" src="img/home.jpeg" alt="personas viendo laptops">b
+        <div class="containerHome__filter"></div>
+        <article class="containerHome__contenido">
+            <h1><span>Recursos <span>para</span></span> <span>Developers</span></h1>
+            <a class="containerHome__btn btn" href="/getting-started">Empezar a descubrir</a>
+            <p class="containerHome__texto">No pierdas tiempo buscando en Google librerías o recursos, aquí encontraras lo que necesitas de una manera más rápida.</p>
+        </article>
+    </section>
+    <main>
+    
+    <section class="websContador">
+        <h2><%=cantWebs%></h2>
+        <p>Webs registradas</p>
+    </section>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <section class="footer__contenedor">
+            <img width="80" src="img/logo.png" alt="logotipo de revs">
+            <h2>Revs (Recursos para Desarrolladores y Diseñadores)</h2>
+            <a href="/contacto" class="btn btn-border">Contactame</a>
+            <a href="mailto:luisdaniel.dlr.380@gmail.com">Aministrador del sitio</a>
+            <a href="/politicas">Términos y condiciones</a>
+        </section>
+
+        <a href="#top" class="btnUp"><svg class="icon icon-tabler icon-tabler-chevrons-up" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <polyline points="7 11 12 6 17 11" />
+            <polyline points="7 17 12 12 17 17" />
+          </svg></a>
+
+    </footer>
+
+
+</body>
+</html>

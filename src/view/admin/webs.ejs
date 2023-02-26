@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es_MX">
+<%-include('partials/head.ejs')%>
+<body>
+
+    <%-include('partials/nav.ejs')%>
+
+
+    <main class="admin-container bg-color-white">
+
+        <header class="d-flex align-items-end justify-content-between">
+            <section class="d-flex flex-column">
+                <h1 class="">Webs registradas (<b><%=webs.length%></b>)</h1>
+                <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modalNewWeb">Agregar Web</button>
+            </section>
+
+            <!--BARRA DE BUSQUEDA Y CATEGORIAS-->
+            <section class="d-flex align-items-center gap-1">
+                <input type="search" id="search" placeholder="Buscar" class="form-control">
+                <div class="btn-group">
+                    <button type="button" class="btn bg-ligth-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      Categorías
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><button type="button" class="dropdown-item d-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#modalNewCat">Agregar categoría<ion-icon style="font-size: 1.4rem;" name="add-circle-sharp"></ion-icon></button></li>
+                        <li><hr class="dropdown-divider"></li>
+                    <%categories.forEach( c => {%>    
+                        <li onclick="filterCategorie(`<%=c._id%>`)" id="categorie<%=c._id%>"><span class="dropdown-item"><%=c.nameCategory%></span></li>
+                    <%});%>
+                    </ul>
+                  </div>
+            </section>
+        </header>
+
+        <!-- NOTE Modal categorias -->
+        <div class="modal fade" id="modalNewCat" tabindex="-1" aria-labelledby="modalNewCatLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form action="/insertCategory" method="post"  class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalNewCatLabel">Nueva categoría</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <!--CUERPO MODAL-->
+                    <div class="modal-body">
+                        <section class="form-floating">
+                            <input class="form-control" placeholder="Ingresa una nueva categoría" type="text" id="nameCategory" name="nameCategory">
+                            <label for="nameCategory">Nombre de categoría</label>
+                        </section>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+        <section class="table-responsive-md mt-3 mb-3">
+            <table class="table table-striped table-hover">
+                <thead class="bg-dark-ligth">
+                    <tr>
+                        <th>Icono</th>
+                        <th>Nombre</th>
+                        <th>Categorías</th>
+                        <th>Puntos</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                <%webs.forEach( (w) => {%>
+    
+                    <tr>
+                        <td><img src="<%=w.icon%>" alt="icono de <%=w.nameWeb%>" width="100" height="100"></td>
+                        <td class="middle"><%=w.nameWeb%></td>
+                        <td><%=w.category%></td>
+                        <td><%=w.likes%></td>
+                        <td>
+                            <article class="d-flex gap-2 align-items-center justify-content-center">
+                                <form action="/deleteWeb/<%=w._id%>" method="POST">
+                                    <button type="submit" class="btn btn-outline-danger"><ion-icon name="trash"></ion-icon></button>
+                                </form>
+                                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#editWeb<%=w._id%>"><ion-icon name="create-outline"></ion-icon></button>
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalInfoWeb<%=w._id%>"><ion-icon name="help"></ion-icon></button>
+                            </article>
+                        </td>
+                    </tr>
+
+                    <!-- NOTE MODAL MÁS INFORMACIÓN -->
+                    <section class="modal" id="modalInfoWeb<%=w._id%>" tabindex="-1">
+                        <section class="modal-dialog">
+                          <section class="modal-content">
+                            <header class="modal-header">
+                              <h5 class="modal-title d-flex align-items-center gap-2"><img src="<%=w.icon%>" width="35" alt=""><%=w.nameWeb%></h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </header>
+                            <section class="modal-body">
+
+                                <section>
+                                    <img class="d-block w-100" src="<%=w.img%>" alt="">
+                                    
+                                    <h5 class="pt-1">Descripción</h5>
+                                    <textarea readonly disabled class="form-control" rows="5"><%=w.info%></textarea>
+                                    
+                                </section>
+
+                            </section>
+                            <footer class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar ventana</button>
+                            </footer>
+                          </section>
+                        </section>
+                      </section>
+
+
+
+                    <!-- NOTE MODAL EDITAR WEB -->
+                    <div class="modal" id="editWeb<%=w._id%>" tabindex="-1" aria-labelledby="editWebLabel" aria-hidden="true">
+                        <section class="modal-dialog">
+                            <section class="modal-content">
+                                <form action="/updateWeb/<%=w._id%>" method="POST">
+                                    <header class="modal-header">
+                                        <h5 class="modal-title" id="editWebLabel">Editar <%=w.nameWeb%></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </header>
+    
+                                    <section style="max-height: 70vh; overflow: auto;" class="modal-body">
+                                        
+                                        <!--*NOMBRE-->
+                                        <label for="nameWeb" class="form-label">Nombre de la Web</label>
+                                        <article class="input-group mb-3">
+                                            <span class="input-group-text"><ion-icon name="browsers-sharp"></ion-icon></span>
+                                            <input type="text" name="nameWeb" class="form-control" id="nameWeb" value="<%=w.nameWeb%>">
+                                        </article>
+                                        
+                                        <!--*CATEGORIA-->
+                                        <label for="category" class="form-label">Categoría</label>
+                                        <article class="mb-3 input-group">
+                                            <span class="input-group-text"><ion-icon name="albums"></ion-icon></span>
+                                            <select class="form-control" name="category" id="category">
+                                                <option value="<%=w.category%>" selected><%=w.category%></option>
+                                                
+                                                <!--? CATEGORIAS DESDE DB-->
+                                                <%categories.forEach( c => {%>
+                                                    <option value="<%=c.nameCategory%>"><%=c.nameCategory%></option>
+                                                    <%});%>
+                                                    
+                                                </select>
+                                            </article>
+                                            
+                                        <!--*DESCRIPCION-->
+                                        <label for="info" class="form-label">Descripción</label>
+                                        <article class="mb-3 input-group">
+                                            <span class="input-group-text"><ion-icon name="information-circle"></ion-icon></span>
+                                            <textarea name="info" class="form-control" id="info"><%=w.info%></textarea>
+                                        </article>
+                                        
+                                        <!--*ENLACE O URL-->
+                                        <label for="urlWeb" class="form-label">Dirección de la web</label>
+                                        <article class="mb-3 input-group">
+                                            <span class="input-group-text"><ion-icon name="link"></ion-icon></span>
+                                            <input type="url" name="urlWeb" class="form-control" id="urlWeb" value="<%=w.urlWeb%>">
+                                        </article>
+                                        
+                                        <!--*IMAGEN WEB-->
+                                        <label for="img" class="form-label">Imagen de la web</label>
+                                        <article class="mb-3 input-group">
+                                            <span class="input-group-text"><ion-icon name="image"></ion-icon></span>
+                                            <input type="url" name="img" class="form-control" id="img" value="<%=w.img%>">
+                                        </article>
+                                        
+                                        <!--*LOGO WEB-->
+                                        <label for="icon" class="form-label">Logotipo de la web</label>
+                                        <article class="input-group">
+                                            <span class="input-group-text"><ion-icon name="star"></ion-icon></span>
+                                            <input type="url" name="icon" class="form-control" id="icon" value="<%=w.icon%>">
+                                        </article>
+
+
+                                    </section>
+                                    
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                                    </div>
+                                </form>
+                            </section>
+                        </section>
+                    </div>
+
+                
+                <%});%>
+                
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+
+    <!--NOTE MODAL NUEVA WEB-->
+    <section class="modal" id="modalNewWeb" tabindex="-1" aria-labelledby="modalNewWebLabel" aria-hidden="true">
+        <section class="modal-dialog">
+            <section class="modal-content">
+                <form action="/insertWeb" method="POST">
+                    <header class="modal-header">
+                        <h5 class="modal-title" id="modalNewWebLabel">Registro de Web</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </header>
+
+                    <section style="max-height: 70vh; overflow: auto;" class="modal-body">
+                        
+                        <!--*NOMBRE-->
+                        <label for="nameWeb" class="form-label">Nombre de la Web</label>
+                        <article class="input-group mb-3">
+                            <span class="input-group-text"><ion-icon name="browsers-sharp"></ion-icon></span>
+                            <input type="text" name="nameWeb" placeholder="Ingresa el nombre" class="form-control" id="nameWeb">
+                        </article>
+                        
+                        <!--*CATEGORIA-->
+                        <label for="category" class="form-label">Categoría</label>
+                        <article class="mb-3 input-group">
+                            <span class="input-group-text"><ion-icon name="albums"></ion-icon></span>
+                            <select class="form-control" name="category" id="category">
+                                <option selected disabled>--Selecciona una Web--</option>
+                                
+                                <!--? CATEGORIAS DESDE DB-->
+                                <%categories.forEach( c => {%>
+                                    <option value="<%=c.nameCategory%>"><%=c.nameCategory%></option>
+                                <%});%>
+                                    
+                                </select>
+                            </article>
+                            
+                        <!--*DESCRIPCION-->
+                        <label for="info" class="form-label">Descripción</label>
+                        <article class="mb-3 input-group">
+                            <span class="input-group-text"><ion-icon name="information-circle"></ion-icon></span>
+                            <textarea name="info" class="form-control" id="info" placeholder="Añade una descripción"></textarea>
+                        </article>
+                        
+                        <!--*ENLACE O URL-->
+                        <label for="urlWeb" class="form-label">Dirección de la web</label>
+                        <article class="mb-3 input-group">
+                            <span class="input-group-text"><ion-icon name="link"></ion-icon></span>
+                            <input type="url" name="urlWeb" class="form-control" id="urlWeb" placeholder="Ingresa un enlace">
+                        </article>
+                        
+                        <!--*IMAGEN WEB-->
+                        <label for="img" class="form-label">Imagen de la web</label>
+                        <article class="mb-3 input-group">
+                            <span class="input-group-text"><ion-icon name="image"></ion-icon></span>
+                            <input type="url" name="img" class="form-control" id="img" placeholder="Ingresa la url de una imagen">
+                        </article>
+                        
+                        <!--*LOGO WEB-->
+                        <label for="icon" class="form-label">Logotipo de la web</label>
+                        <article class="input-group">
+                            <span class="input-group-text"><ion-icon name="star"></ion-icon></span>
+                            <input type="url" name="icon" class="form-control" id="icon" placeholder="Ingresa la url del logo">
+                        </article>
+
+
+                    </section>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                    </div>
+                </form>
+            </section>
+        </section>
+    </div>
+
+
+    <script src="/js/searchTable.js"></script>
+</body>
+</html>

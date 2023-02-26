@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<%-include('partials/head.ejs')%>
+<body>
+<%-include('partials/navbar.ejs')%>
+
+
+<section class="contacto">
+    <main class="contacto__container">
+        <form action="/send-message" method="post" class="contacto__form">
+            <fieldset>
+                <legend class="contacto__legend">¿Te interesa contactarnos?</legend>
+                
+                <div class="contacto__inputs">
+                    <label class="contacto__label" id="label__nameUser" for="nameUser">Nombre</label>
+                    <input class="contacto__input" type="text" name="nameUser" id="nameUser" placeholder="Escribe tu nombre aquí" value="<%=name%>">
+                    <span id="messageErrValidation__name" class="messageErrValidation"></span>
+                </div>
+                
+                <div class="contacto__inputs">
+                    <label class="contacto__label" id="label__mail" for="email">Correo eléctronico (opcional)</label>
+                    <input class="contacto__input" type="email" name="email" id="email" placeholder="Escribe un correo electronico" value="<%=email%>">
+                    <span id="messageErrValidation__mail" class="messageErrValidation"></span>
+                </div>
+                
+                <div class="contacto__inputs">
+                    <label class="contacto__label" id="label__message" for="message">Mensaje</label>
+                    <textarea class="contacto__input" name="message" id="message" placeholder="Escribe aquí tu mensaje"></textarea>
+                    <span id="messageErrValidation__message" class="messageErrValidation"></span>
+                </div>
+    
+                <div class="contacto__inputs">
+                    <button id="btnSubmit" type="submit">Enviar Mensaje</button>
+                </div>
+            
+            </fieldset>
+    
+        </form>
+    </main>
+    
+    
+    <section class="contacto__container">
+        <article class="redes">
+            <ul class="redes__correos">
+                <li class="redes__enlaces"><h3>Administrador</h3><a href="mailto:admin@revs.com">admin@revs.com</a></li>
+                <li class="redes__enlaces"><h3>Desarrollador</h3><a href="mailto:luisdaniel.dlr.380@gmail.com">luisdaniel.dlr.380@gmail.com</a></li>
+            </ul>
+            <ul class="redes__list">
+                <li>Sigueme</li>
+                <li class="redes__enlaces"><i class="fa-brands fa-instagram"></i><a href="">@daniel_develop</a></li>
+                <li class="redes__enlaces"><i class="fa-brands fa-github"></i><a href="">LuisDanielDLR</a></li>
+            </ul>
+            <ul class="redes__portafolios">
+                <li>Portafolios</li>
+                <li class="redes__enlaces"><span class="material-symbols-outlined">public</span><a href="">Desarrollo Web</a></li>
+                <li class="redes__enlaces"><span class="material-symbols-outlined">public</span><a href="">Dibujo Digital</a></li>
+            </ul>
+        </article>
+        
+    </section>
+</section>
+
+<script src="/js/validacionMessage.js"></script>
+
+<script>
+    document.querySelectorAll('.link')[3].style.color="var(--colorPrimary)";
+    document.querySelectorAll('.link')[3].style.pointerEvents = "none"
+</script>
+
+</body>
+</html>

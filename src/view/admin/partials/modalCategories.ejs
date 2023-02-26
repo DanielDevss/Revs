@@ -1,0 +1,76 @@
+<dialog class="modalCategories">
+
+    <header class="modalCategories__header">
+        <section>
+            <h2 class="modalCategories__title">Categorías</h2>
+            <button class="btn-add" id="addCategorie">
+                <span class="material-symbols-outlined">add</span>
+            </button>
+        </section>
+        <button class="btn-closeModal" onclick="document.querySelector('.modalCategories').close()">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+    </header>
+    <p class="modalCategories__subtitle"><%= categories.length %> categorias actualmente</p>
+
+    <form class="modalCategories__formNew" action="/insertCategory" method="post">
+        <label for="nameCategory">Nombre de la categoría</label>
+        <div>
+            <input type="text" name="nameCategory" id="nameCategory" placeholder="Ingresa el nombre de la categoría">
+            <button type="submit" class="btn-add">
+                <span class="material-icons">save</span>
+            </button>
+        </div>
+    </form>
+
+
+    <div class="separadorLine"></div>
+
+    <ul class="modalCategories__list">
+        <%categories.forEach( (c) => {%>
+        <li>
+            <%=c.nameCategory%>
+            <div class="d-flex gap-2">
+                <form action="/deleteCategory/<%=c._id%>" method="post">
+                    <button type="submit" class="btn-delete btn-accion" style="width: auto;"><span class="material-icons">delete</span></button>
+                </form>
+                <button onclick="document.querySelector('.inpName<%=c._id%>').showModal()" type="button" class="btn-update btn-accion" style="width: auto;"><span class="material-icons">edit</span></button>
+                
+
+                <!--Ventana para cambiar de nombre de categoria-->
+                <dialog style="margin: auto;" class="inpName<%=c._id%> modalCategories">
+                    <form action="/updateCategory/<%=c._id%>" method="post" class="d-flex flex-column gap-4">
+                        <label class="modal__label" for="">Nuevo nombre</label>
+                        <div class="modal__groupForm">
+                            <input class="modal__inp" type="text" name="nameCategory" placeholder="Ingresa un nuevo nombre">
+                            <button class="btn-accion btn-update" type="submit"><span class="material-icons">done</span></button>                        
+                        </div>
+                    </form>
+                
+                </dialog>
+            </div>
+
+        </li>
+        <%});%>
+    </ul>
+
+</dialog>
+
+
+<script>
+    let formNewCat = document.querySelector('.modalCategories__formNew'),
+        btnAdd = document.querySelector( '#addCategorie' );
+
+
+    btnAdd.addEventListener('click', () => actionAdd());
+
+    function actionAdd () {
+        if(!formNewCat.classList.contains('modalCategories__formNew--active')){
+            formNewCat.classList.add('modalCategories__formNew--active')
+            btnAdd.style.transform="rotate(45deg)"
+        }else{
+            formNewCat.classList.remove('modalCategories__formNew--active')
+            btnAdd.style.transform="rotate(0deg)"
+        }
+    }
+</script>

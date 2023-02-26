@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<%-include('partials/head.ejs')%>
+
+<body>
+<%-include('partials/navbar.ejs')%>
+
+
+
+    <main class="forms">
+        <form id="formularioLogin" class="formulario" action="/login" method="POST">
+            <fieldset class="formulario__fieldset">
+                <legend class="formulario__legend">Iniciar sesión</legend>
+                <div class="formulario__inputGroup group__email">
+                    <label for="email" class="formulario__label"><ion-icon name="mail-outline"></ion-icon> Correo electronico</label>
+                    <input type="email" id="inpEmail" placeholder="Ingresa el correo electronico" name="email" class="formulario__input">
+                    <span class="formulario__spanAlert" id="spanErr__Email"></span>
+                </div>
+                <div class="formulario__inputGroup group__pass">
+                    <label for="pass" class="formulario__label"><ion-icon name="lock-closed-outline"></ion-icon> Contraseña</label>
+                    <div class="inputPass">
+                        <input type="password" id="inpPass" placeholder="Ingresa tu contraseña" name="pass" class="formulario__input">
+                        <button type="button" class="btn-inInput" id="showPass"><ion-icon class="iconEye" name="eye-outline"></ion-icon></button>
+                    </div>
+                    <span class="formulario__spanAlert" id="spanErr__Pass"></span>
+                </div>
+                <div class="formulario__buttonGroup">
+                    <button class="btn-primaryForm" type="submit">Iniciar sesión</button>
+                    <button class="btn-secundaryForm" id="btnShowRegister" type="button">Registrate</button>
+                </div>
+            </fieldset>
+        </form>
+
+
+        <form id="formularioRegister" autocomplete="off" class="formulario" action="/cookData" method="POST">
+            <fieldset class="formulario__fieldset">
+                <legend class="formulario__legend register__legend">Registre sus datos <div class="loaderBar"><div class="charge"></div></div></legend>
+
+                <section class="register__containers">
+
+                    <section class="register__part">
+    
+                        <div class="formulario__inputGroup">
+                            <label class="formulario__label" for="name">Nombre completo</label>
+                            <input autocomplete="off" class="formulario__input" placeholder="Ingrese su nombre completo" type="text" name="name" id="inpNameReg">
+                            <span class="span__alert" id="spanAlert__Name"></span>
+                        </div>
+    
+                        <div class="formulario__inputGroup">
+                            <label class="formulario__label" for="profesion">Profesión</label>
+                            <select class="formulario__input" name="profesion" id="inpProfesionReg">
+                                <option value="" selected disabled>Seleccione una profesiòn</option>
+                                
+                                <%prof.forEach( e => {%>
+                                
+                                <option value="<%=e.nameProfesion%>"><%=e.nameProfesion%></option>
+
+                                <%});%>
+                            </select>
+                            <span class="span__alert" id="spanAlert__Profesion"></span>
+                        </div>
+    
+                        <div class="formulario__buttonGroup">
+                            <button class="btn-secundaryForm" type="button" id="btnShowLogin">Regresar</button>
+                            <button class="btn-primaryForm" onclick="part2()" type="button">Siguiente</button>
+                        </div>
+    
+                        
+                    </section>
+                    
+                    <section class="register__part">
+                        
+                        <div class="formulario__inputGroup">
+                            <label class="formulario__label" for="email">Correo</label>
+                            <input autocomplete = "off" class="formulario__input" placeholder="Ingrese un correo vàlido" type="email" name="email" id="inpEmailReg">
+                            <span class="span__alert" id="spanAlert__Email"></span>
+                        </div>
+    
+                        <div class="formulario__inputGroup">
+                            <label class="formulario__label" for="phone">Número de teléfono <b>(opcional)</b></label>
+                            <input autocomplete = "off" class="formulario__input" placeholder="Ingrese un nùmero telèfonico" type="tel" name="phone" id="inpPhoneReg">
+                            <span class="span__alert" id="spanAlert__Phone"></span>
+                        </div>
+    
+                        <div class="formulario__buttonGroup">
+                            <button class="btn-secundaryForm" onclick="part1()" type="button">Atras</button>
+                            <button class="btn-primaryForm" onclick="part3()" type="button">Siguiente</button>
+                        </div>
+    
+                    </section>
+                    
+                    <section class="register__part">
+                        
+                        <div class="formulario__inputGroup">
+                            <label class="formulario__label" for="pass">Contraseña</label>
+                            <div class="inputPass">
+                                <input autocomplete = "off" class="formulario__input" placeholder="Ingresa una contraseña" type="password" name="pass" id="inpPassReg">
+                                <button type="button" class="btn-inInput" id="showPassReg"><ion-icon id="showPassRegIcon" class="iconEye" name="eye-outline"></ion-icon></button>
+                            </div>
+                            <span class="span__alert" id="spanAlert__Pass"></span>
+                        </div>
+                        
+                        <div class="formulario__inputGroup">
+                            <label class="formulario__label" for="passRepeat">Confirma contraseña</label>
+                            <input autocomplete = "off" class="formulario__input" placeholder="Repite la contraseña" type="password" id="inpPassRepeatReg">
+                            <span class="span__alert" id="spanAlert__PassRepeat"></span>
+                        </div>
+                        
+                        <div class="formulario__inputGroup">
+                            <span>Al registrarte estás aceptando los <a href="/informacion">términos de condición</a>.</span>
+                        </div>
+
+                        <div class="formulario__buttonGroup">
+                            <button class="btn-secundaryForm" onclick="part2()" type="button">Volver</button>
+                            <button class="btn-primaryForm" id="btnSubmitRegister" type="submit">Registrar</button>
+                        </div>
+                </section>
+
+
+                </section>
+
+
+            </fieldset>
+        </form>
+
+
+    </main>
+
+
+    </script> <!--alertas -->
+    <script src="/js/validationRegister.js"></script>
+    <script src="/js/formSlide.js"></script>
+    <script src="/js/scriptsLogin&Register.js"></script>
+
+
+    <%if(alert == true){%>
+    <script>
+        Swal.fire({
+            icon: '<%=sweet_icon%>',
+            title: '<%=sweet_title%>',
+            text: '<%=sweet_message%>',
+        });
+    </script>
+    <%}%>
+
+</body>
+</html>

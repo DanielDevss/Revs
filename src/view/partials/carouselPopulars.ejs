@@ -1,0 +1,121 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+
+
+<main class="container carousel pb-4">
+    <h2 class="carousel__title">Populares</h2>
+    <span class="carousel__subtitle">Top 20 webs más populares en <b>Revs</b></span>
+
+
+    <section class="swiper swiperBestWebs">
+        <section class="swiper-wrapper">
+            
+            <% webs.forEach( (best) => { %>
+                
+            <article class="swiper-slide">
+                <article class="cardweb">
+                    <img class="cardweb" style="filter: brightness(.8);" src="<%=best.icon%>">
+                    <header class="cardweb__header">
+                        <form action="/saveWeb/<%=best._id%>" method="POST">
+                            <button class="cardweb__btnIcon" type="submit"><span class="span_none">Guardar</span><ion-icon name="bookmark"></ion-icon></button>
+                        </form>
+                        <form action="/like/<%=best._id%>" method="POST">
+                            <button class="cardweb__btnIcon" type="submit"><span class="span_none">Me gusta</span><ion-icon name="heart"></ion-icon></button>
+                        </form>
+                    </header>
+                    <footer class="cardweb__dropup">
+                        <span class="cardweb__title"><%=best.nameWeb%></span>
+                        <div class="cardweb__list">
+                            <a class="cardweb__link" href="<%=best.urlWeb%>">Visitar web</a>
+                            <button class="cardweb__button" onclick="document.querySelector('#modalBest<%=best._id%>').showModal();">Más información</button>
+                        </div>
+                    </footer>
+                </article>
+            </article>
+            
+            
+
+            <dialog id="modalBest<%=best._id%>" class="modalInfoWeb">
+                <header class="modalInfoWeb__header">
+                    <div class="modolInfoWeb__logo">
+                        <img class="modalInfoWeb__icon" width="60" src="<%=best.icon%>" alt="">
+                        <div class="modalInfoWeb__headerText">
+                            <h2><%=best.nameWeb%></h2>
+                            <span>Le gusto a <%=best.likes%> personas más</span>
+                        </div>
+                    </div>
+                    <a class="btn-border" href="<%=best.urlWeb%>">Visitar sitio web</a>
+                </header>
+                <article class="modalInfoWeb__body">
+                    <textarea class="modalInfo__textarea"><%=best.info%></textarea>
+                    <img src="<%=best.img%>" alt="Imagen de <%=best.nameWeb%>">
+                </article>
+                <article class="modalInfoWeb__footer">
+                    <div>
+                        <form action="/saveWeb/<%=best._id%>" method="POST">
+                            <button type="submit" class="btn-simple-primary"><ion-icon name="bookmark-outline"></ion-icon>Guardar web</button>
+                        </form>
+                        <form action="#" method="POST">
+                            <button type="submit" class="btn-simple-primary"><ion-icon name="heart-circle-outline"></ion-icon>Me gusta</button>
+                        </form>
+                    </div>
+                    <button class="modalInfoWeb__close" onclick="document.querySelector('#modalBest<%=best._id%>').close()">Cerrar ventana</button>
+                </article>
+            </dialog>
+
+        <% }); %>
+        
+        </section>
+        <section class="swiper-pagination"></section>
+
+        <span class="swiper-control swiper-button-prev"></span>
+        <span class="swiper-control swiper-button-next"></span>
+
+    </section>
+
+    
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper(".swiperBestWebs", {
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+
+    slidesPerView: 1,
+    spaceBetween: 20,
+
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      renderBullet: function (index, className) {
+        return '<span class="' + className + '">' + (index + 1) + "</span>";
+      },
+    },
+
+    breakpoints:{
+        480 :   {
+            slidesPerView: 1,
+            spaceBetween: 10,
+        },
+        520 :   {
+            slidesPerView: 2,
+            spaceBetween: 10,
+        },
+        1024 :   {
+            slidesPerView: 3,
+            spaceBetween: 10,
+        },
+        1240:   {
+            slidesPerView:4,
+            spaceBetween: 10
+        }
+      },
+    
+  });
+</script>
