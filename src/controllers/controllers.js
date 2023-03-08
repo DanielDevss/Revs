@@ -321,10 +321,12 @@ controller.userUpdate = (req,res) => {
 
 //TODO Guardar web
 controller.saveWebUser = (req,res) => {
+    
     const {_idWeb} = req.params;
+
     const email = jwt.verify(req.cookies.userToken, process.env.JWT_SECRET).userToken;
 
-    let tableName   =   "saveWebs",
+    let tableName   =   "savewebs",
         body        =   "(_idWeb, email)",
         values      =   `("${_idWeb}", "${email}")`;
 

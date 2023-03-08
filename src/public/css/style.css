@@ -1063,21 +1063,15 @@ body{
 
 .getting__title{
     font-size: 3rem;
-    max-width: 500px;
     width: 100%;
     line-height: 3rem;
+    text-align: center;
     margin-bottom: 2rem;
-}
-@media(max-width:950px){
-    .getting__title{
-        text-align: start;
-    }
 }
 .getting__text{
     line-height: 2;
-    width: 80%;
     margin-left: auto;
-    text-align: end;
+    text-align: center;
     font-size: 1.2rem;
 }
 @media(max-width:950px){
@@ -1138,6 +1132,8 @@ body{
 .cardweb{
     width: 100%;
     height: 100%;
+    object-fit: contain;
+    object-position: center;
     overflow: hidden;
     border-radius: 1rem;
     -webkit-border-radius: 1rem;
@@ -1166,11 +1162,12 @@ body{
     bottom: 0;
 }
 
+
 .cardweb__header{
     position: absolute;
     top: -100%;
-    left: 1rem;
-    right: 1rem;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: space-between;
     transition: .3s ease-in-out;
@@ -1180,7 +1177,10 @@ body{
     -o-transition: .3s ease-in-out;
 }
 .cardweb:hover .cardweb__header{
-    top: 1rem;
+    top: 0;
+    background: linear-gradient(#34333383, #00000000);
+    padding: 1rem;
+    padding-bottom: 2rem;
 }
 
 .cardweb__btnIcon{
@@ -1210,19 +1210,21 @@ body{
 .cardweb__bg{
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
-    position: absolute;
-    z-index: -1;
+    position: relative;
+    z-index: 0;
     transition: .3s ease;
     -webkit-transition: .3s ease;
     -moz-transition: .3s ease;
     -ms-transition: .3s ease;
     -o-transition: .3s ease;
 }
+
 .cardweb:hover .cardweb__bg{
-    filter: blur(5px);
-    -webkit-filter: blur(5px);
+    object-fit: cover;
+    filter: blur(5px) brightness(50%) !important;
+    -webkit-filter: blur(5px) brightness(50%) !important;
 }
 
 .cardweb__dropup{

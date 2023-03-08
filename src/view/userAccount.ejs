@@ -128,7 +128,7 @@
             
             <section class="save">
                 
-                <%webs.forEach((e)=>{%>
+                <%webs.forEach( e =>{%>
                 <article class="save__card">    
                     <form action="/deleteSaveWeb/<%=e.idWeb%>" method="POST">
                         <button class="save__delete" type="submit"><ion-icon name="trash-outline"></ion-icon></button>

@@ -9,11 +9,11 @@
     <section class="swiper swiperBestWebs">
         <section class="swiper-wrapper">
             
-            <% webs.forEach( (best) => { %>
+            <% webs.forEach( best => { %>
                 
             <article class="swiper-slide">
                 <article class="cardweb">
-                    <img class="cardweb" style="filter: brightness(.8);" src="<%=best.icon%>">
+                    <img class="cardweb__bg" src="<%=best.icon%>">
                     <header class="cardweb__header">
                         <form action="/saveWeb/<%=best._id%>" method="POST">
                             <button class="cardweb__btnIcon" type="submit"><span class="span_none">Guardar</span><ion-icon name="bookmark"></ion-icon></button>
