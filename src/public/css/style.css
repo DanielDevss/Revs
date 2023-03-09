@@ -1549,6 +1549,7 @@ body{
     border: none;
 }
 .modolInfoWeb__logo{
+
     display: flex;
     gap: .5rem;
 }
@@ -1563,7 +1564,9 @@ body{
     font-size: 1.2rem;
 }
 
-
+.modalInfoWeb__icon{
+    object-fit: contain;
+}
 .modalInfo__textarea{
     resize: none;
     border: none;

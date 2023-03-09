@@ -26,8 +26,8 @@ const controller = {};
 controller.insertCategory = (req, res) => {
 
     let table   = "category",
-        body    = "(nameCategory, cant)",
-        values  = `('${req.body.nameCategory}', '${req.body.cant}')`;
+        body    = "(nameCategory, cant, icon)",
+        values  = `('${req.body.nameCategory}', '${req.body.cant}', '${req.body.icon}')`;
 
     querys.insert(table, body, values);
 
@@ -155,6 +155,7 @@ controller.index = (req,res) => {
                     title   :   "Administrador",
                     users   :   users.length,
                     webs    :   webs.length,
+                    cat     :   category,
                     category:   category.length
                 });
             });

@@ -17,11 +17,11 @@
         </article>
         <article class="col-md-4 col-sm-6">
             <article class="card">
-                <a href="/admin-webs">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#categories">
                     <ion-icon class="icon-card" name="albums"></ion-icon>
                     <h3><%=category%></h3>
                     <p>Categorias</p>
-                </a>
+                </button>
             </article>
         </article>
         <article class=" col-sm-12 col-md-4">
@@ -34,6 +34,39 @@
             </article>
         </article>
     </main>
+
+
+    <section class="modal" id="categories" tabindex="-1">
+        <section class="modal-dialog">
+          <div class="modal-content">
+            <header class="modal-header">
+              <h5 class="modal-title">Categorías</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </header>
+            <div class="modal-body">
+                <h5>Nueva Categoría</h5>
+                <form action="/insertCategory" method="POST">
+                    <div class="input-group">
+                        <input type="text" name="nameCategory" class="form-control" placeholder="Categoría">
+                        <input type="text" name="icon" class="form-control" placeholder="Icono">
+                        <button class="btn btn-outline-success"><ion-icon name="save"></ion-icon></button>                    
+                    </div>
+                </form>
+                <hr>
+                <h5>Categorías actuales</h5>
+                <ul style="height: 250px; overflow: auto;" class="list-group">
+                <%cat.forEach( c => {%>
+                    <li class="list-group-item d-flex align-items-center justify-content-between"><%=c.nameCategory%> <form method="POST" action="/deleteCategory/<%=c._id%>"><button class="btn btn-danger"><ion-icon name="trash-outline"></ion-icon></button></form></li>
+                <%});%>
+                </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </section>
+      </section>
+
 
 </body>
 </html>

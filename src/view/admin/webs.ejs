@@ -22,8 +22,6 @@
                       Categorías
                     </button>
                     <ul class="dropdown-menu">
-                        <li><button type="button" class="dropdown-item d-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#modalNewCat">Agregar categoría<ion-icon style="font-size: 1.4rem;" name="add-circle-sharp"></ion-icon></button></li>
-                        <li><hr class="dropdown-divider"></li>
                     <%categories.forEach( c => {%>    
                         <li onclick="filterCategorie(`<%=c._id%>`)" id="categorie<%=c._id%>"><span class="dropdown-item"><%=c.nameCategory%></span></li>
                     <%});%>
@@ -33,7 +31,7 @@
         </header>
 
         <!-- NOTE Modal categorias -->
-        <div class="modal fade" id="modalNewCat" tabindex="-1" aria-labelledby="modalNewCatLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="modalNewCat" tabindex="-1" aria-labelledby="modalNewCatLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <form action="/insertCategory" method="post"  class="modal-content">
                     <div class="modal-header">
@@ -41,7 +39,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <!--CUERPO MODAL-->
+                    CUERPO MODAL
                     <div class="modal-body">
                         <section class="form-floating">
                             <input class="form-control" placeholder="Ingresa una nueva categoría" type="text" id="nameCategory" name="nameCategory">
@@ -55,7 +53,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div> -->
 
 
 

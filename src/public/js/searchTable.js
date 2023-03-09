@@ -20,6 +20,8 @@ function filterCategorie(id){
     } 
 }
 
+inp.addEventListener('keypress', filtrar);
+
 function filtrar(){
 
     const filter = inp.value.toUpperCase();
