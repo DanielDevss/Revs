@@ -3,7 +3,7 @@
     <!--<h2 class="sidebar__title"><ion-icon name="funnel-outline"></ion-icon></h2>-->
     <ul class="sidebar__content">
         <% results.forEach( (e) => { %>
-        <li class="sidebar__link">
+        <li style="display:flex; align-items:center;" class="sidebar__link">
             <ion-icon name="<%=e.icon%>"></ion-icon>
             <a style="display: block;" href="/categories/<%=e.nameCategory%>"><%=e.nameCategory%> (<b><%=e.cant%></b>)</a>
         </li>
