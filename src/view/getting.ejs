@@ -10,20 +10,54 @@
 
     <main class="container getting">
         <h1 class="f-averia getting__title">Empecemos</h1>
-        <p class="getting__text">Encuentra recursos útiles para desarrolladores y diseñadores en un solo lugar. Este sitio web ofrece una variedad de librerías gratuitas y premium que incluyen herramientas, plugins, fuentes, iconos, biblioteca de imágenes, frameworks CSS, animaciones para sitios web, desafíos y mucho más. Descubre cómo enriquecer tus proyectos y llevarlos al siguiente nivel con nuestra selección de recursos.</p>
+        <p class="getting__text">¡Bienvenido al mundo de los recursos digitales! Aquí encontrarás todo lo que necesitas para llevar tus proyectos al siguiente nivel. Desde fuentes y iconos, hasta generadores CSS y librerías JS, ¡lo tenemos todo! Ya seas un profesional experimentado o un estudiante entusiasta, nuestra selección de recursos te ayudará a impulsar tus habilidades y a crear contenido increíble. ¡Comencemos a explorar juntos!</p>
     </main>
 
 
     <div class="separador"></div>
-
+    
     <%-include('partials/carouselPopulars.ejs')%>
+    
+    <div class="separador"></div>
+    
+    <section class="container tips">
+
+
+        <h2 class="title">Tips</h2>
+        
+        <section class="tips__contenedor">
+            <article class="tips__card">
+                <ion-icon class="tips__icon" name="bookmark-outline"></ion-icon>
+                <h3 class="tips__title">Guardar</h3>
+                <p>Guarda tus páginas web favoritas y no las pierdas nunca más. Inicia sesión y guarda tus enlaces en un solo lugar</p>
+            </article>
+            <article class="tips__card">
+                <ion-icon class="tips__icon" name="heart-outline"></ion-icon>
+                <h3 class="tips__title">Puntuar</h3>
+                <p>Vota por tus páginas favoritas y descubre nuevas recomendaciones en nuestro sitio</p>
+            </article>
+            <article class="tips__card">
+                <ion-icon class="tips__icon" name="person-add-outline"></ion-icon>
+                <h3 class="tips__title">Registrate</h3>
+                <p>Regístrate para guardar y puntuar tus páginas favoritas</p>
+                <a href="/account">Ingresa tus datos</a>
+            </article>
+        </section>
+
+        <ul style="width: 90%; margin: auto; line-height: 2; margin-top: 2rem;">
+            <h3 class="acuerdo__subtitle">Beneficios</h3>
+            <li><b>Guardar: </b>Al guardar tus páginas favoritas en nuestro sitio, nunca más las perderás. Tendrás acceso rápido y fácil a tus sitios web preferidos en cualquier momento y desde cualquier lugar.</li>
+            <li><b>Puntuar: </b>Con la opción de puntuar las páginas web, podrás encontrar las recomendaciones más populares y de mayor calidad en la red. La sabiduría colectiva de nuestra comunidad te guiará hacia el contenido más valioso.</li>
+            <li><b>Registrar: </b>Al registrarte en nuestro sitio, tendrás acceso exclusivo a funciones especiales, como guardar y puntuar sitios web. Además, recibirás actualizaciones periódicas sobre nuevas funciones y recursos que te ayudarán a mejorar tus proyectos digitales.</li>
+        </ul>
+
+
+    </section>
 
     <script>
         document.querySelectorAll('.link')[1].style.color="var(--colorPrimary)";
         document.querySelectorAll('.link')[1].style.pointerEvents = "none"
     </script>
-
-
 
 
 </body>
