@@ -4,6 +4,7 @@
     <ul class="sidebar__content">
         <% results.forEach( (e) => { %>
         <li class="sidebar__link">
+            <ion-icon name="<%=e.icon%>"></ion-icon>
             <a style="display: block;" href="/categories/<%=e.nameCategory%>"><%=e.nameCategory%> (<b><%=e.cant%></b>)</a>
         </li>
         <% }); %>
